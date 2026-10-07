@@ -1,9 +1,11 @@
-import { transporter } from "../config/mail";
+import { Resend } from 'resend';
 import { welcomeEmailTemplate } from "../templates/welcome.template";
 
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 const sendEmail = async (to: string, subject: string, html: string) => {
-    await transporter.sendMail({
-        from: `"Node Auth App" <${process.env.EMAIL_USER}>`,
+    await resend.emails.send({
+        from: `"Node Auth App" <onboarding@resend.dev>`,
         to,
         subject,
         html
